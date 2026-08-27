@@ -1,0 +1,257 @@
+/* ---------------------------------------------------------------------- */
+/* Tokens                                                                  */
+/* ---------------------------------------------------------------------- */
+:root {
+  /* Brand blues (bold, modern — the "survey" gradient) */
+  --indigo: #263bdb;
+  --indigo-dark: #131a4d;
+  --indigo-soft: #4658f0;
+  --violet: #7c5cfb;
+  --teal: #17b3a3;
+
+  /* Warm neutrals */
+  --cream: #f6efe2;
+  --cream-deep: #efe4d0;
+  --paper-card: #ffffff;
+
+  /* Ink */
+  --ink: #151730;
+  --ink-soft: #5c5e78;
+  --line: rgba(21, 23, 48, 0.1);
+  --line-strong: rgba(21, 23, 48, 0.16);
+
+  /* Accent kept from the site's real material — Roorkee brick — used sparingly */
+  --terracotta: #c1622d;
+  --mustard: #c1922e;
+  --moss: #3f8f6f;
+
+  /* Type */
+  --font-sans: "DM Sans", "Segoe UI", sans-serif;
+  --font-serif: "DM Serif Display", Georgia, serif;
+  --font-mono: "DM Mono", "Consolas", monospace;
+
+  /* Shape + elevation */
+  --r-sm: 14px;
+  --r-md: 22px;
+  --r-lg: 32px;
+  --r-pill: 999px;
+  --shadow-sm: 0 8px 24px -12px rgba(19, 26, 77, 0.25);
+  --shadow-md: 0 24px 48px -20px rgba(19, 26, 77, 0.35);
+  --gradient-brand: linear-gradient(135deg, var(--indigo) 0%, var(--violet) 100%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  margin: 0 0 0.5em;
+}
+
+em, i {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+@media (max-width: 640px) {
+  .container { padding: 0 20px; }
+  body { font-size: 16px; }
+}
+
+button, input, textarea {
+  font-family: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--indigo);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------------------------------------------------------------------- */
+/* Eyebrow / mono utility text                                            */
+/* ---------------------------------------------------------------------- */
+.mono {
+  font-family: var(--font-mono);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 12.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--indigo);
+  background: rgba(38, 59, 219, 0.08);
+  padding: 7px 16px;
+  border-radius: var(--r-pill);
+  margin-bottom: 18px;
+}
+
+.eyebrow--on-dark {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.eyebrow--plain {
+  background: none;
+  padding: 0;
+  color: var(--ink-soft);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Gradient text                                                          */
+/* ---------------------------------------------------------------------- */
+.text-gradient {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Buttons                                                                 */
+/* ---------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 15px;
+  padding: 15px 28px;
+  border-radius: var(--r-pill);
+  border: 1px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: var(--gradient-brand);
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.btn-ghost-dark {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.btn-ghost-dark:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #fff;
+}
+
+.btn-ghost-light {
+  color: var(--ink);
+  border-color: var(--line-strong);
+  background: var(--paper-card);
+}
+
+.btn-ghost-light:hover {
+  border-color: var(--indigo);
+  color: var(--indigo);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Section rhythm                                                         */
+/* ---------------------------------------------------------------------- */
+.section {
+  padding: 96px 0;
+}
+
+.section--dark {
+  background: var(--indigo-dark);
+  color: #fff;
+}
+
+.section--tight {
+  padding: 64px 0;
+}
+
+@media (max-width: 720px) {
+  .section { padding: 64px 0; }
+}
+
+.section-head {
+  max-width: 640px;
+  margin-bottom: 48px;
+}
+
+.section-head h2 {
+  font-size: clamp(28px, 4vw, 42px);
+}
+
+.scale-note {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Surfaces                                                                */
+/* ---------------------------------------------------------------------- */
+.surface {
+  background: var(--paper-card);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 44px 40px;
+}
+
+@media (max-width: 640px) {
+  .surface { padding: 28px 24px; }
+}

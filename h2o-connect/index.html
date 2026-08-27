@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>H2o Connect</title>
+<meta name="description" content="Smart water tank monitoring &amp; motor control — H2o Connect">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=4">
+</head>
+<body>
+
+<div class="app-shell">
+  <div class="phone" id="phone">
+
+    <!-- ============ F1 · HOME ============ -->
+    <section class="screen active" id="screen-home" data-screen="home">
+      <div class="screen-scroll">
+        <div class="status-bar">
+          <span class="status-time" id="clock-home">9:41</span>
+          <div class="status-indicators">
+            <span class="signal-bars"><span></span><span></span><span></span><span></span></span>
+            <span class="icon-wifi"><img src="assets/wifi.svg" alt=""></span>
+            <span class="battery">
+              <span class="battery-shell"></span><span class="battery-fill"></span><span class="battery-tip"></span>
+            </span>
+          </div>
+        </div>
+
+        <div class="top-bar">
+          <button class="icon-btn" id="btn-logo" title="H2o Connect" aria-label="Home">
+            <img src="assets/logo-button.svg" alt="">
+          </button>
+          <div class="top-bar-right">
+            <button class="icon-btn" id="btn-bell" aria-label="Notifications">
+              <img src="assets/bell-button.svg" alt="">
+            </button>
+            <button class="icon-btn menu" id="btn-menu" aria-label="Demo menu">
+              <span class="menu-lines"><span></span><span></span></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="content" style="padding-top:0;">
+          <!-- Level card -->
+          <div class="card card-level">
+            <div class="tank-chips">
+              <button class="chip active" data-tank="overhead"><span class="dot sm dot-ink"></span>Overhead</button>
+              <button class="chip" data-tank="sump"><span class="dot sm dot-muted"></span>Sump</button>
+              <button class="chip-add" aria-label="Add tank">+</button>
+            </div>
+            <div class="level-row">
+              <div class="tank" id="home-tank">
+                <div class="water" id="home-water" style="height:78%;"></div>
+                <div class="mark" style="top:23px;"></div>
+                <span class="mark-label" style="top:29px;">MAX</span>
+                <div class="mark" style="top:174px;"></div>
+                <span class="mark-label" style="top:180px;">MIN</span>
+              </div>
+              <div class="level-readout">
+                <div class="level-pct"><span class="num" id="home-pct">78</span><span class="sign">%</span></div>
+                <div class="level-litres" id="home-litres">1,560 of 2,000 L</div>
+                <div class="status-pill" id="home-status-pill"><span class="dot sm dot-white"></span><span id="home-status-text">Filling · 12 min left</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Motor card -->
+          <button class="card-motor-wrap" id="home-motor-card">
+            <div class="card-motor" id="home-motor-inner">
+              <div class="tag-row"><span class="dot sm dot-ink"></span><span id="home-motor-tag">Motor running · automatic</span></div>
+              <div class="timer" id="home-motor-timer">04:12</div>
+              <div class="meta" id="home-motor-meta">0.75 kW · 4.2 units saved this week</div>
+              <div class="motor-stop-btn" id="home-motor-btn"><span></span></div>
+            </div>
+          </button>
+
+          <!-- Usage card -->
+          <button class="card card-usage" id="home-usage-card">
+            <div class="usage-top-row">
+              <div class="tag-row"><span class="dot sm dot-muted"></span>This week</div>
+              <div class="chevron-circle"><img src="assets/chevron-circle.svg" alt=""></div>
+            </div>
+            <div class="usage-figure"><span class="num">1,240</span><span class="unit">L</span></div>
+            <div class="mini-bars">
+              <span style="height:17px;"></span>
+              <span style="height:23px;"></span>
+              <span style="height:12px;"></span>
+              <span style="height:27px;"></span>
+              <span style="height:20px;"></span>
+              <span class="hi" style="height:34px;"></span>
+              <span style="height:15px;"></span>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <div class="tab-bar" data-tabbar="home">
+        <button class="nav-btn active" data-nav="home"><img src="assets/nav-home-active.svg" alt="Home"></button>
+        <button class="nav-btn" data-nav="usage"><span class="nav-bars"><span></span><span></span><span></span></span></button>
+        <button class="nav-btn" data-nav="motor"><img src="assets/nav-motor-inactive.svg" alt="Motor"></button>
+        <button class="nav-btn" data-nav="automation"><img src="assets/nav-modes-inactive.svg" alt="Automation"></button>
+        <button class="nav-action" data-nav="fill-range"><img src="assets/action-fillnow.svg" alt="Fill now"></button>
+      </div>
+      <div class="home-indicator"></div>
+    </section>
+
+    <!-- ============ F2 · FILL RANGE ============ -->
+    <section class="screen" id="screen-fill-range" data-screen="fill-range">
+      <div class="status-bar">
+        <span class="status-time">9:41</span>
+        <div class="status-indicators">
+          <span class="signal-bars"><span></span><span></span><span></span><span></span></span>
+          <span class="icon-wifi"><img src="assets/wifi.svg" alt=""></span>
+          <span class="battery"><span class="battery-shell"></span><span class="battery-fill"></span><span class="battery-tip"></span></span>
+        </div>
+      </div>
+      <button class="back-btn" data-back="home"><img src="assets/back.svg" alt="Back"></button>
+
+      <div class="content with-header" style="margin-top:16px;">
+        <div class="header-block">
+          <h1 class="headline">Fill range</h1>
+          <p class="sub">Overhead tank</p>
+        </div>
+
+        <div class="card card-range">
+          <div class="range-tank-wrap">
+            <div class="tank" style="height:232px;">
+              <div class="water" id="range-water" style="height:78%;"></div>
+              <div class="mark" style="top:23px;"></div><span class="mark-label" style="top:29px;">MAX</span>
+              <div class="mark" style="top:174px;"></div><span class="mark-label" style="top:180px;">MIN</span>
+            </div>
+            <div class="handle handle-stop" id="handle-stop" style="top:14px;"></div>
+            <div class="handle handle-start" id="handle-start" style="top:165px;"></div>
+          </div>
+          <div class="range-readouts">
+            <div class="range-readout" id="readout-stop" style="top:0;">
+              <span class="label" style="color:var(--water);">STOP FILLING</span>
+              <div class="value-row"><span class="value" id="stop-pct">90%</span><span class="litres" id="stop-litres">1,800 L</span></div>
+            </div>
+            <div class="range-readout" id="readout-start" style="top:151px;">
+              <span class="label" style="color:var(--alert-low);">START FILLING</span>
+              <div class="value-row"><span class="value" id="start-pct">25%</span><span class="litres" id="start-litres">500 L</span></div>
+            </div>
+            <p class="range-hint" style="top:207px;">Drag either handle on the tank.</p>
+          </div>
+        </div>
+
+        <div class="card card-meaning">
+          <p class="title">What this means</p>
+          <p class="body">The motor runs about 18 minutes each time, roughly twice a day. A narrower range keeps the tank fuller but runs the motor more often.</p>
+        </div>
+
+        <button class="btn btn-lime" id="save-range-btn">Save range</button>
+      </div>
+
+      <div class="tab-bar">
+        <button class="nav-btn" data-nav="home"><img src="assets/nav-home-inactive.svg" alt="Home"></button>
+        <button class="nav-btn" data-nav="usage"><span class="nav-bars"><span></span><span></span><span></span></span></button>
+        <button class="nav-btn" data-nav="motor"><img src="assets/nav-motor-inactive.svg" alt="Motor"></button>
+        <button class="nav-btn" data-nav="automation"><img src="assets/nav-modes-inactive.svg" alt="Automation"></button>
+        <button class="nav-action" data-nav="fill-range"><img src="assets/action-fillnow.svg" alt="Fill now"></button>
+      </div>
+      <div class="home-indicator"></div>
+    </section>
+
+    <!-- ============ F3 · MOTOR ============ -->
+    <section class="screen" id="screen-motor" data-screen="motor">
+      <div class="status-bar">
+        <span class="status-time">9:41</span>
+        <div class="status-indicators">
+          <span class="signal-bars"><span></span><span></span><span></span><span></span></span>
+          <span class="icon-wifi"><img src="assets/wifi.svg" alt=""></span>
+          <span class="battery"><span class="battery-shell"></span><span class="battery-fill"></span><span class="battery-tip"></span></span>
+        </div>
+      </div>
+      <button class="back-btn" data-back="home"><img src="assets/back.svg" alt="Back"></button>
+
+      <div class="content with-header" style="margin-top:16px; gap:24px;">
+        <div class="header-block">
+          <h1 class="headline">Motor</h1>
+          <p class="sub">Overhead tank</p>
+        </div>
+
+        <div class="card-running" id="motor-running-card" style="width:100%; border-radius:28px;">
+          <div class="tag-row"><span class="dot sm dot-ink" id="motor-dot"></span><span id="motor-tag">RUNNING · AUTOMATIC</span></div>
+          <div class="hero-timer" id="motor-timer">04:12</div>
+          <div class="sub" id="motor-sub">of about 18 min</div>
+          <div class="progress-track"><div class="progress-fill" id="motor-progress" style="width:23%;"></div></div>
+        </div>
+
+        <div class="stat-row">
+          <div class="stat-box"><span class="label">FLOW</span><div class="value-row"><span class="value" id="motor-flow">22</span><span class="unit">L/min</span></div></div>
+          <div class="stat-box"><span class="label">POWER</span><div class="value-row"><span class="value">0.75</span><span class="unit">kW</span></div></div>
+          <div class="stat-box"><span class="label">TODAY</span><div class="value-row"><span class="value">3</span><span class="unit">runs</span></div></div>
+        </div>
+
+        <div class="setting-row">
+          <div><p class="setting-title">Dry-run protection</p><p class="setting-desc">Cuts power if the sump runs empty</p></div>
+          <button class="toggle on" data-toggle="dryrun"><span class="knob"></span></button>
+        </div>
+      </div>
+
+      <div class="content" style="position:absolute; bottom:130px; left:0; right:0; padding:0 24px;">
+        <button class="btn btn-danger" id="motor-stop-toggle">Stop motor</button>
+      </div>
+
+      <div class="tab-bar">
+        <button class="nav-btn" data-nav="home"><img src="assets/nav-home-inactive.svg" alt="Home"></button>
+        <button class="nav-btn" data-nav="usage"><span class="nav-bars"><span></span><span></span><span></span></span></button>
+        <button class="nav-btn active" data-nav="motor"><img src="assets/nav-motor-active.svg" alt="Motor"></button>
+        <button class="nav-btn" data-nav="automation"><img src="assets/nav-modes-inactive.svg" alt="Automation"></button>
+        <button class="nav-action" data-nav="fill-range"><img src="assets/action-fillnow.svg" alt="Fill now"></button>
+      </div>
+      <div class="home-indicator"></div>
+    </section>
+
+    <!-- ============ F4 · AUTOMATION ============ -->
+    <section class="screen" id="screen-automation" data-screen="automation">
+      <div class="status-bar">
+        <span class="status-time">9:41</span>
+        <div class="status-indicators">
+          <span class="signal-bars"><span></span><span></span><span></span><span></span></span>
+          <span class="icon-wifi"><img src="assets/wifi.svg" alt=""></span>
+          <span class="battery"><span class="battery-shell"></span><span class="battery-fill"></span><span class="battery-tip"></span></span>
+        </div>
+      </div>
+      <button class="back-btn" data-back="home"><img src="assets/back.svg" alt="Back"></button>
+
+      <div class="content with-header" style="margin-top:16px;">
+        <h1 class="headline">Automation</h1>
+
+        <div class="mode-switch" id="mode-switch">
+          <div class="mode-switch-indicator" id="mode-switch-indicator"></div>
+          <button class="mode-seg active" data-mode="automatic">Automatic</button>
+          <button class="mode-seg" data-mode="manual">Manual</button>
+          <button class="mode-seg" data-mode="smart"><img src="assets/sparkle-tab-muted.svg" alt="">Smart</button>
+        </div>
+
+        <!-- Automatic panel -->
+        <div id="panel-automatic" style="display:flex; flex-direction:column; gap:14px; width:100%;">
+          <div class="card card-how">
+            <p class="eyebrow">HOW AUTOMATIC WORKS</p>
+            <div class="how-row"><span class="dot sm dot-lime"></span><span class="strong">Drops to 25%</span><span class="muted">motor starts itself</span></div>
+            <div class="how-row"><span class="dot sm dot-lime"></span><span class="strong">Reaches 90%</span><span class="muted">motor cuts off itself</span></div>
+            <div class="how-row"><span class="dot sm dot-lime"></span><span class="strong">Sensor goes quiet</span><span class="muted">you get an alert</span></div>
+          </div>
+          <div class="setting-row">
+            <div><p class="setting-title">Eco mode</p><p class="setting-desc">Runs only in off-peak hours · 4.2 units saved</p></div>
+            <button class="toggle on" data-toggle="eco"><span class="knob"></span></button>
+          </div>
+          <div class="setting-row disabled">
+            <div><p class="setting-title">Boost</p><p class="setting-desc">Fills at maximum rate</p></div>
+            <button class="toggle" data-toggle="boost"><span class="knob"></span></button>
+          </div>
+          <div class="setting-row">
+            <div><p class="setting-title">Quiet hours</p><p class="setting-desc">No motor between 11 PM and 6 AM</p></div>
+            <button class="toggle on" data-toggle="quiet"><span class="knob"></span></button>
+          </div>
+        </div>
+
+        <!-- Manual panel -->
+        <div id="panel-manual" style="display:none; flex-direction:column; gap:14px; width:100%;">
+          <div class="card manual-note">
+            <p class="title">Manual mode</p>
+            <p class="body">Nothing happens automatically. You start and stop the motor yourself from Home. If the tank runs low, H2o Connect will warn you instead of acting.</p>
+          </div>
+          <div class="setting-row">
+            <div><p class="setting-title">Low water alerts</p><p class="setting-desc">Notify me when the tank drops below 25%</p></div>
+            <button class="toggle on" data-toggle="manual-alert"><span class="knob"></span></button>
+          </div>
+          <div class="setting-row disabled">
+            <div><p class="setting-title">Boost</p><p class="setting-desc">Fills at maximum rate</p></div>
+            <button class="toggle" data-toggle="boost2"><span class="knob"></span></button>
+          </div>
+          <div class="setting-row">
+            <div><p class="setting-title">Quiet hours</p><p class="setting-desc">No motor between 11 PM and 6 AM</p></div>
+            <button class="toggle on" data-toggle="quiet2"><span class="knob"></span></button>
+          </div>
+        </div>
+
+        <!-- Smart panel -->
+        <div id="panel-smart" style="display:none; flex-direction:column; gap:12px; width:100%;">
+          <div class="card card-prediction">
+            <p class="eyebrow"><img src="assets/sparkle-label.svg" alt="">PREDICTION</p>
+            <p class="prediction-lead">You'll reach 25% at</p>
+            <p class="prediction-value">4:10 PM tomorrow</p>
+            <span class="confidence-pill" style="color:var(--lime);">LEARNED FROM 34 DAYS · 92% CONFIDENT</span>
+          </div>
+          <div class="card card-plan">
+            <p class="eyebrow">TONIGHT'S PLAN</p>
+            <div class="plan-row">
+              <div><p class="title">Fill 01:40 – 02:05</p><p class="desc">Off-peak tariff · inside quiet hours</p></div>
+              <span class="save-pill">SAVES 38%</span>
+            </div>
+            <button class="why-row" id="why-time-btn">Why this time?<img src="assets/chevron-small.svg" alt=""></button>
+          </div>
+          <div class="setting-row">
+            <div><p class="setting-title">Let Smart shift fill times</p><p class="setting-desc">Always within your quiet hours</p></div>
+            <button class="toggle on" data-toggle="smart-shift"><span class="knob"></span></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-bar">
+        <button class="nav-btn" data-nav="home"><img src="assets/nav-home-inactive.svg" alt="Home"></button>
+        <button class="nav-btn" data-nav="usage"><span class="nav-bars"><span></span><span></span><span></span></span></button>
+        <button class="nav-btn" data-nav="motor"><img src="assets/nav-motor-inactive.svg" alt="Motor"></button>
+        <button class="nav-btn active" data-nav="automation"><img src="assets/nav-modes-active.svg" alt="Automation"></button>
+        <button class="nav-action" data-nav="fill-range"><img src="assets/action-fillnow.svg" alt="Fill now"></button>
+      </div>
+      <div class="home-indicator"></div>
+    </section>
+
+    <!-- ============ F6 · USAGE ============ -->
+    <section class="screen" id="screen-usage" data-screen="usage">
+      <div class="status-bar">
+        <span class="status-time">9:41</span>
+        <div class="status-indicators">
+          <span class="signal-bars"><span></span><span></span><span></span><span></span></span>
+          <span class="icon-wifi"><img src="assets/wifi.svg" alt=""></span>
+          <span class="battery"><span class="battery-shell"></span><span class="battery-fill"></span><span class="battery-tip"></span></span>
+        </div>
+      </div>
+
+      <div class="content with-header" style="margin-top:18px; gap:18px;">
+        <h1 class="headline">Usage</h1>
+
+        <div class="range-tabs">
+          <button class="range-tab active" data-range="week">Week</button>
+          <button class="range-tab" data-range="month">Month</button>
+          <button class="range-tab" data-range="year">Year</button>
+        </div>
+
+        <div class="card card-week">
+          <div class="week-stats">
+            <div class="stat">
+              <div class="label">WATER USED</div>
+              <div class="value-row"><span class="value" id="usage-water">1,240</span><span class="unit unit-water">L</span></div>
+            </div>
+            <div class="stat">
+              <div class="label">ELECTRICITY</div>
+              <div class="value-row"><span class="value" id="usage-elec">8.4</span><span class="unit unit-lime">units</span></div>
+            </div>
+          </div>
+          <div class="bar-chart" id="usage-bar-chart">
+            <div class="col"><div class="track"><div class="fill" style="height:104px;"></div></div><span class="day-label">M</span></div>
+            <div class="col"><div class="track"><div class="fill" style="height:71px;"></div></div><span class="day-label">T</span></div>
+            <div class="col"><div class="track"><div class="fill" style="height:37px;"></div></div><span class="day-label">W</span></div>
+            <div class="col"><div class="track"><div class="fill" style="height:83px;"></div></div><span class="day-label">T</span></div>
+            <div class="col"><div class="track"><div class="fill" style="height:60px;"></div></div><span class="day-label">F</span></div>
+            <div class="col peak"><div class="track"><div class="fill" style="height:104px;"></div></div><span class="day-label">S</span></div>
+            <div class="col"><div class="track"><div class="fill" style="height:46px;"></div></div><span class="day-label">S</span></div>
+          </div>
+        </div>
+
+        <div class="recent-runs">
+          <p class="section-label">RECENT MOTOR RUNS</p>
+          <div class="run-row">
+            <div><p class="date">Today, 6:42 AM</p><p class="meta">18 min · 720 L</p></div>
+            <span class="run-tag auto">AUTO</span>
+          </div>
+          <div class="run-row">
+            <div><p class="date">Yesterday, 7:10 PM</p><p class="meta">12 min · 480 L</p></div>
+            <span class="run-tag manual">MANUAL</span>
+          </div>
+          <div class="run-row">
+            <div><p class="date">Monday, 6:38 AM</p><p class="meta">21 min · 840 L</p></div>
+            <span class="run-tag auto">AUTO</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-bar">
+        <button class="nav-btn" data-nav="home"><img src="assets/nav-home-inactive.svg" alt="Home"></button>
+        <button class="nav-btn active" data-nav="usage"><span class="nav-bars"><span></span><span></span><span></span></span></button>
+        <button class="nav-btn" data-nav="motor"><img src="assets/nav-motor-inactive.svg" alt="Motor"></button>
+        <button class="nav-btn" data-nav="automation"><img src="assets/nav-modes-inactive.svg" alt="Automation"></button>
+        <button class="nav-action" data-nav="fill-range"><img src="assets/action-fillnow.svg" alt="Fill now"></button>
+      </div>
+      <div class="home-indicator"></div>
+    </section>
+
+    <!-- ============ F5 · LOW WATER ALERT (overlay) ============ -->
+    <div class="overlay low" id="overlay-low">
+      <div class="glow"></div>
+      <div class="status-bar" style="position:relative; z-index:1;">
+        <span class="status-time">9:41</span>
+        <div class="status-indicators">
+          <span class="signal-bars"><span></span><span></span><span></span><span></span></span>
+          <span class="icon-wifi"><img src="assets/wifi.svg" alt=""></span>
+          <span class="battery"><span class="battery-shell"></span><span class="battery-fill"></span><span class="battery-tip"></span></span>
+        </div>
+      </div>
+      <button class="close-btn" style="position:absolute; right:24px; top:56px; z-index:2;" data-close="overlay-low"><img src="assets/close.svg" alt="Close"></button>
+
+      <div class="overlay-content">
+        <span class="alert-chip low"><span class="dot sm dot-low"></span>MANUAL MODE · 6:42 AM</span>
+        <div class="tank tank-danger" style="height:232px;">
+          <div class="water" style="height:22%;"></div>
+          <div class="mark" style="top:22px;"></div><span class="mark-label" style="top:28px;">MAX</span>
+          <div class="mark" style="top:173px;"></div><span class="mark-label" style="top:179px;">MIN</span>
+        </div>
+        <div class="alert-copy">
+          <p class="title">Water is low</p>
+          <p class="body">Overhead tank is at 22%. The motor is off.</p>
+        </div>
+        <div class="overlay-actions">
+          <button class="btn btn-lime" data-close="overlay-low" data-action="turn-on-motor">Turn on motor now</button>
+          <button class="btn btn-neutral" data-close="overlay-low">Remind me in 15 minutes</button>
+        </div>
+        <p class="overlay-foot lime">Switch to Automatic so this happens on its own</p>
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+
+    <!-- ============ F8 · SMART INSIGHT (overlay) ============ -->
+    <div class="overlay leak" id="overlay-leak">
+      <div class="glow"></div>
+      <div class="status-bar" style="position:relative; z-index:1;">
+        <span class="status-time">9:41</span>
+        <div class="status-indicators">
+          <span class="signal-bars"><span></span><span></span><span></span><span></span></span>
+          <span class="icon-wifi"><img src="assets/wifi.svg" alt=""></span>
+          <span class="battery"><span class="battery-shell"></span><span class="battery-fill"></span><span class="battery-tip"></span></span>
+        </div>
+      </div>
+      <button class="close-btn" style="position:absolute; right:24px; top:56px; z-index:2;" data-close="overlay-leak"><img src="assets/close.svg" alt="Close"></button>
+
+      <div class="overlay-content" style="margin-top:74px;">
+        <span class="alert-chip critical"><img src="assets/sparkle-alert.svg" alt="" style="width:12px;height:12px;">SMART NOTICED · 5:04 AM</span>
+        <div class="alert-copy">
+          <p class="title">Possible leak</p>
+          <p class="body">The tank lost 42 L overnight while every tap was closed.</p>
+        </div>
+        <div class="card card-evidence">
+          <p class="eyebrow">WHAT SMART SAW</p>
+          <span class="tag-expected">Expected</span>
+          <div class="evidence-graph">
+            <svg viewBox="0 0 302 60" preserveAspectRatio="none">
+              <line x1="0" y1="6" x2="302" y2="6" stroke="#626a77" stroke-width="1.5" stroke-dasharray="4 4"/>
+              <path d="M0,4 C60,10 120,22 170,34 C220,45 260,52 302,56" fill="none" stroke="#ff4d5e" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+            <span class="drop-badge">−42 L</span>
+          </div>
+          <span class="tag-actual">Actual</span>
+          <div class="evidence-labels"><span>1:00 AM</span><span>5:00 AM</span></div>
+        </div>
+        <div class="overlay-actions">
+          <button class="btn btn-lime" data-close="overlay-leak">Close the inlet valve</button>
+          <button class="btn btn-neutral" data-close="overlay-leak">That was us — ignore it</button>
+        </div>
+        <p class="overlay-foot faint">Ignoring teaches Smart your household's pattern</p>
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+
+    <!-- ============ Demo & feedback panel ============ -->
+    <div class="demo-panel" id="demo-panel">
+      <div class="demo-sheet">
+        <h3>Demo &amp; feedback</h3>
+        <p>Pulled straight from the H2o Connect Figma file. Take the guided tour to see how it all fits together, jump into a scenario, or tell us what you think.</p>
+
+        <button class="demo-btn demo-btn-primary" id="start-tour-btn">🧭 Take the guided tour</button>
+
+        <div class="demo-divider">Try a scenario</div>
+        <button class="demo-btn" data-demo="low-water">💧 Simulate low water (Manual mode) → alert</button>
+        <button class="demo-btn" data-demo="leak">🔎 Simulate Smart noticing a leak</button>
+        <button class="demo-btn" data-demo="reset">↺ Reset to default state</button>
+
+        <div class="demo-divider">Feedback</div>
+        <button class="demo-btn" id="open-feedback-btn">💬 Give feedback on this demo</button>
+
+        <button class="demo-close" id="demo-close">Close</button>
+      </div>
+    </div>
+
+    <!-- ============ Guided tour overlay ============ -->
+    <div class="tour-overlay" id="tour-overlay">
+      <div class="tour-spotlight" id="tour-spotlight"></div>
+      <div class="tour-tooltip" id="tour-tooltip">
+        <div class="tour-tip-head">
+          <span class="tour-step-count" id="tour-step-count">1 / 8</span>
+          <button class="tour-skip" id="tour-skip">Skip tour</button>
+        </div>
+        <p class="tour-title" id="tour-title">Title</p>
+        <p class="tour-text" id="tour-text">Text</p>
+        <div class="tour-tip-foot">
+          <div class="tour-dots" id="tour-dots"></div>
+          <div class="tour-tip-buttons">
+            <button class="tour-btn tour-btn-ghost" id="tour-back">Back</button>
+            <button class="tour-btn tour-btn-lime" id="tour-next">Next</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ Feedback modal ============ -->
+    <div class="feedback-modal" id="feedback-modal">
+      <div class="feedback-sheet">
+        <button class="feedback-x" id="feedback-close" aria-label="Close">✕</button>
+
+        <div class="feedback-view" id="feedback-form-view">
+          <h3>How's the demo?</h3>
+          <p>A quick rating helps us prioritize what to fix or build next.</p>
+          <div class="feedback-stars" id="feedback-stars">
+            <button class="star" type="button" data-v="1">★</button>
+            <button class="star" type="button" data-v="2">★</button>
+            <button class="star" type="button" data-v="3">★</button>
+            <button class="star" type="button" data-v="4">★</button>
+            <button class="star" type="button" data-v="5">★</button>
+          </div>
+          <textarea id="feedback-text" rows="3" placeholder="What worked well? What was confusing? (optional)"></textarea>
+          <button class="btn btn-lime" id="feedback-submit">Send feedback</button>
+        </div>
+
+        <div class="feedback-view" id="feedback-thanks-view" style="display:none;">
+          <div class="feedback-check">✓</div>
+          <h3>Thanks for the feedback!</h3>
+          <p>Saved on this device — it helps shape what we build next.</p>
+          <button class="btn btn-neutral" id="feedback-done">Done</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+  </div>
+</div>
+
+<p class="demo-note">A functional build of the <strong>H2o Connect</strong> “Final Flow” — 8 screens, wired end‑to‑end from a Figma design.<br>Tap the <strong>≡</strong> icon on Home for the guided tour, demo scenarios, and feedback.</p>
+
+<script src="app.js?v=3"></script>
+</body>
+</html>

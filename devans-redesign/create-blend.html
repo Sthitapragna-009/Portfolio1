@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Create Blend — DEVAN'S</title>
+<meta name="description" content="Mix and match Devan's single-origin coffees by roast and grind, and preview the tasting profile before you order." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="shop.html">Coffee</a>
+      <a href="create-blend.html" class="active">Create Blend</a>
+      <a href="about.html">Our Story</a>
+      <a href="contact.html">Visit / Contact</a>
+    </nav>
+    <a href="index.html" class="brand">Devan's</a>
+    <div class="nav-cta">
+      <span class="nav-est">Est. 1962</span>
+      <a href="shop.html" class="pill pill-sm">Shop</a>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="eyebrow">Mix &amp; match</div>
+    <h1 class="headline" style="margin-top:12px;">Create your blend.</h1>
+    <p class="hero-intro">Pick one or two single origins, choose a roast and a grind, and we'll preview the tasting profile — the same six-axis chart every coffee on this site carries.</p>
+  </div>
+</section>
+
+<div class="wide" style="margin-top:0;">
+  <div class="blend-grid">
+
+    <div class="blend-panel blend-panel-full">
+      <h3>Bean Origin</h3>
+      <p class="blend-panel-hint">Pick 1 or 2 single origins to blend.</p>
+      <div class="origin-chip-row" id="origin-chips"></div>
+    </div>
+
+    <div class="blend-panel">
+      <h3>Roast Profile</h3>
+      <div class="bean-row" id="bean-row"></div>
+      <input type="range" class="range-slider" id="roast-slider" min="0" max="3" step="1" value="1" aria-label="Roast level" />
+      <div class="slider-value-label" id="roast-value"></div>
+    </div>
+
+    <div class="blend-panel">
+      <h3>Grind Size</h3>
+      <div class="grind-row" id="grind-row"></div>
+      <input type="range" class="range-slider" id="grind-slider" min="0" max="3" step="1" value="1" aria-label="Grind size" />
+      <div class="slider-value-label" id="grind-value"></div>
+    </div>
+
+    <div class="blend-panel blend-panel-full">
+      <h3>Order Preview</h3>
+      <div class="blend-preview-layout">
+        <div class="preview-copy">
+          <p id="preview-text"></p>
+          <div class="preview-summary" id="preview-summary"></div>
+          <div class="preview-actions">
+            <div>
+              <span class="buy-price" id="blend-price"></span>
+              <div class="buy-weight-select" style="margin-top:14px;" id="weight-select">
+                <button class="weight-btn active" data-w="250g">250g</button>
+                <button class="weight-btn" data-w="500g">500g</button>
+              </div>
+            </div>
+            <button class="pill pill-solid" id="blend-add">Add Custom Blend to Bag</button>
+          </div>
+        </div>
+        <div id="blend-bloom"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <b>Menu</b>
+        <ul>
+          <li><a href="shop.html">Coffee</a></li>
+          <li><a href="create-blend.html">Create Blend</a></li>
+          <li><a href="about.html">Our Story</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <b>Info</b>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="contact.html">Visit the Cafe</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-promo">
+        <b>Get promotion from us</b>
+        <p>New roasts, seasonal single origins and the odd discount — nothing else.</p>
+        <form class="promo-form" id="promo-form">
+          <input type="email" placeholder="Your email" required />
+          <button type="submit">Sign me up</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Devan's South Indian Coffee &amp; Tea</span>
+      <div class="footer-socials">
+        <a href="https://devans.in" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        </a>
+      </div>
+    </div>
+    <p class="footer-disclaimer">Redesign concept built for portfolio purposes, using product photography sourced from devans.in — not affiliated with or published by Devan's. Original site: devans.in</p>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/app.js"></script>
+<script>
+  const ORIGINS = PRODUCTS.filter((p) => p.category === "Single Origin");
+  const GRINDS = [
+    { label: "Coarse", brews: "French Press · Cold Brew", dots: 3, size: 8 },
+    { label: "Medium-Coarse", brews: "Pour Over · South Indian Filter", dots: 4, size: 6.5 },
+    { label: "Medium-Fine", brews: "Moka Pot · Aero Press", dots: 5, size: 5 },
+    { label: "Fine", brews: "Espresso Machine · Percolator", dots: 7, size: 3.5 },
+  ];
+
+  let selected = [ORIGINS[0].slug];
+  let roastIndex = 1;
+  let grindIndex = 1;
+  let weight = "250g";
+
+  function grindDotsHTML(level) {
+    const g = GRINDS[level];
+    let s = "";
+    for (let i = 0; i < g.dots; i++) s += `<span style="width:${g.size}px;height:${g.size}px;"></span>`;
+    return s;
+  }
+
+  function renderOriginChips() {
+    document.getElementById("origin-chips").innerHTML = ORIGINS.map((p) => `
+      <button type="button" class="origin-chip ${selected.includes(p.slug) ? "active" : ""}" data-slug="${p.slug}">
+        <img src="${p.image}" alt="" />
+        ${p.name}
+      </button>`).join("");
+  }
+
+  function renderBeanRow() {
+    document.getElementById("bean-row").innerHTML = ROAST_LEVELS.map((lab, i) => `
+      <button type="button" data-i="${i}">
+        ${beanIcon(i, { active: i === roastIndex, size: i === roastIndex ? 30 : 24 })}
+        <span class="bean-caption">${lab}</span>
+      </button>`).join("");
+  }
+
+  function renderGrindRow() {
+    document.getElementById("grind-row").innerHTML = GRINDS.map((g, i) => `
+      <button type="button" data-i="${i}" class="${i === grindIndex ? "is-active" : ""}">
+        <span class="grind-dots">${grindDotsHTML(i)}</span>
+        <span class="bean-caption">${g.label}</span>
+      </button>`).join("");
+  }
+
+  function recompute() {
+    const products = selected.map(getProduct);
+    const keys = ["aroma", "body", "acidity", "sweetness", "bitterness", "aftertaste"];
+    const avg = {};
+    keys.forEach((k) => { avg[k] = products.reduce((s, p) => s + p.metrics[k], 0) / products.length; });
+    const roastAvg = products.reduce((s, p) => s + p.roast, 0) / products.length;
+    const diff = roastIndex - roastAvg;
+
+    const adjusted = {
+      aroma: avg.aroma,
+      body: avg.body + diff * 4,
+      acidity: avg.acidity - diff * 8,
+      sweetness: avg.sweetness - diff * 2,
+      bitterness: avg.bitterness + diff * 8,
+      aftertaste: avg.aftertaste + diff * 3,
+    };
+    keys.forEach((k) => { adjusted[k] = Math.max(4, Math.min(96, Math.round(adjusted[k]))); });
+
+    document.getElementById("blend-bloom").innerHTML = flavourBloom(adjusted, { size: 280 });
+
+    const names = products.map((p) => p.name).join(" + ");
+    const grind = GRINDS[grindIndex];
+    document.getElementById("preview-text").textContent =
+      `A custom blend of ${names}, roasted ${ROAST_LEVELS[roastIndex].toLowerCase()} and ground ${grind.label.toLowerCase()} — best brewed as ${grind.brews}.`;
+
+    document.getElementById("preview-summary").innerHTML = `
+      <div class="preview-item"><span>Origin</span><b>${products.length > 1 ? products.length + " blended" : "Single origin"}</b></div>
+      <div class="preview-item"><span>Roast</span><b>${ROAST_LEVELS[roastIndex]}</b></div>
+      <div class="preview-item"><span>Grind</span><b>${grind.label}</b></div>
+      <div class="preview-item"><span>Best for</span><b>${grind.brews}</b></div>
+    `;
+
+    const basePrice = Math.round(products.reduce((s, p) => s + p.price, 0) / products.length / 5) * 5;
+    const price = basePrice + (products.length > 1 ? 25 : 0);
+    const finalPrice = weight === "500g" ? Math.round(price * 1.85 / 5) * 5 : price;
+    document.getElementById("blend-price").textContent = `${money(finalPrice)} / ${weight}`;
+
+    renderOriginChips();
+    renderBeanRow();
+    renderGrindRow();
+  }
+
+  document.getElementById("origin-chips").addEventListener("click", (e) => {
+    const btn = e.target.closest(".origin-chip");
+    if (!btn) return;
+    const slug = btn.dataset.slug;
+    if (selected.includes(slug)) {
+      if (selected.length === 1) { showToast("Pick at least one origin."); return; }
+      selected = selected.filter((s) => s !== slug);
+    } else {
+      if (selected.length >= 2) { showToast("You can blend up to 2 origins — remove one first."); return; }
+      selected = [...selected, slug];
+    }
+    recompute();
+  });
+
+  document.getElementById("bean-row").addEventListener("click", (e) => {
+    const btn = e.target.closest("button[data-i]");
+    if (!btn) return;
+    roastIndex = Number(btn.dataset.i);
+    document.getElementById("roast-slider").value = roastIndex;
+    document.getElementById("roast-value").textContent = ROAST_LEVELS[roastIndex];
+    recompute();
+  });
+  document.getElementById("roast-slider").addEventListener("input", (e) => {
+    roastIndex = Number(e.target.value);
+    document.getElementById("roast-value").textContent = ROAST_LEVELS[roastIndex];
+    recompute();
+  });
+
+  document.getElementById("grind-row").addEventListener("click", (e) => {
+    const btn = e.target.closest("button[data-i]");
+    if (!btn) return;
+    grindIndex = Number(btn.dataset.i);
+    document.getElementById("grind-slider").value = grindIndex;
+    document.getElementById("grind-value").textContent = `${GRINDS[grindIndex].label} — ${GRINDS[grindIndex].brews}`;
+    recompute();
+  });
+  document.getElementById("grind-slider").addEventListener("input", (e) => {
+    grindIndex = Number(e.target.value);
+    document.getElementById("grind-value").textContent = `${GRINDS[grindIndex].label} — ${GRINDS[grindIndex].brews}`;
+    recompute();
+  });
+
+  document.getElementById("weight-select").addEventListener("click", (e) => {
+    const btn = e.target.closest(".weight-btn");
+    if (!btn) return;
+    document.querySelectorAll("#weight-select .weight-btn").forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    weight = btn.dataset.w;
+    recompute();
+  });
+
+  document.getElementById("blend-add").addEventListener("click", () => showToast("Custom blend added — this is a design concept, no live cart."));
+  document.getElementById("promo-form")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    showToast("Design demo only — this form doesn't actually send.");
+  });
+
+  document.getElementById("roast-value").textContent = ROAST_LEVELS[roastIndex];
+  document.getElementById("grind-value").textContent = `${GRINDS[grindIndex].label} — ${GRINDS[grindIndex].brews}`;
+  recompute();
+</script>
+</body>
+</html>

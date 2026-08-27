@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title id="doc-title">Coffee — DEVAN'S</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="shop.html" class="active">Coffee</a>
+      <a href="create-blend.html">Create Blend</a>
+      <a href="about.html">Our Story</a>
+      <a href="contact.html">Visit / Contact</a>
+    </nav>
+    <a href="index.html" class="brand">Devan's</a>
+    <div class="nav-cta">
+      <span class="nav-est">Est. 1962</span>
+      <a href="contact.html" class="pill pill-sm">Visit</a>
+    </div>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <div class="container">
+    <a href="index.html">Home</a> / <a href="shop.html">Coffee</a> / <span id="crumb-name"></span>
+  </div>
+</div>
+
+<section class="product-hero">
+  <div class="container">
+    <div class="product-visual">
+      <div class="pd-photo" id="pd-photo"></div>
+      <div class="brew-row" id="brew-row"></div>
+      <div class="buy-panel">
+        <div class="buy-row">
+          <span class="buy-price" id="buy-price"></span>
+          <span class="gauge-row-label" id="buy-roast"></span>
+        </div>
+        <div class="buy-weight-select" id="weight-select"></div>
+        <button class="pill pill-solid pill-full" id="add-cart">Add to Bag</button>
+      </div>
+    </div>
+
+    <div class="product-info">
+      <div class="kicker-row">
+        <span class="badge" id="badge-cat"></span>
+        <span class="badge badge-tag" id="badge-tag" style="display:none"></span>
+      </div>
+      <h1 id="p-name"></h1>
+      <div class="sub" id="p-sub"></div>
+
+      <div class="origin-line">
+        <div class="origin-item"><span>Origin</span><b id="p-origin"></b></div>
+        <div class="origin-item"><span>Altitude / Process</span><b id="p-altitude"></b></div>
+        <div class="origin-item"><span>Process</span><b id="p-process"></b></div>
+      </div>
+
+      <p class="blurb" id="p-blurb"></p>
+
+      <div class="tip-callout">
+        <span class="tip-label">Best Enjoyed</span>
+        <span class="tip-text" id="p-best-enjoyed"></span>
+      </div>
+
+      <div class="bloom-section">
+        <div class="bloom-head">
+          <div>
+            <h3>Flavour Bloom</h3>
+            <p>Our full tasting profile across six axes — the same chart our roasters use to compare batches.</p>
+          </div>
+        </div>
+        <div class="bloom-layout">
+          <div id="bloom-chart"></div>
+          <div class="bloom-legend" id="bloom-legend"></div>
+        </div>
+        <div class="roast-detail">
+          <div class="roast-detail-head"><span>Roast &amp; strength</span><b id="roast-detail-label"></b></div>
+          <div id="roast-detail-gauge"></div>
+        </div>
+        <div class="tasting-copy">
+          <b>Tasting notes</b>
+          <span id="p-tasting"></span>
+        </div>
+      </div>
+
+      <div class="brew-guide-section">
+        <div class="bloom-head">
+          <div>
+            <h3>How to Brew</h3>
+            <p>Pick a method — dose, water and time update to match. Benchmarked against how Blue Tokai and Araku show theirs.</p>
+          </div>
+        </div>
+        <div class="brew-tabs" id="brew-tabs"></div>
+        <div class="recipe-grid" id="recipe-grid"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="related-section">
+  <div class="wide">
+    <div class="section-label">
+      <h2>You might also like</h2>
+      <p>Customers who order this usually brew one of these next.</p>
+    </div>
+    <div class="product-grid" id="related-grid"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <b>Menu</b>
+        <ul>
+          <li><a href="shop.html">Coffee</a></li>
+          <li><a href="create-blend.html">Create Blend</a></li>
+          <li><a href="about.html">Our Story</a></li>
+          <li><a href="contact.html">Visit / Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <b>Info</b>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="contact.html">Visit the Cafe</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-promo">
+        <b>Get promotion from us</b>
+        <p>New roasts, seasonal single origins and the odd discount — nothing else.</p>
+        <form class="promo-form" id="promo-form">
+          <input type="email" placeholder="Your email" required />
+          <button type="submit">Sign me up</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Devan's South Indian Coffee &amp; Tea</span>
+      <div class="footer-socials">
+        <a href="https://devans.in" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        </a>
+      </div>
+    </div>
+    <p class="footer-disclaimer">Redesign concept built for portfolio purposes, using product photography sourced from devans.in — not affiliated with or published by Devan's. Original site: devans.in</p>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/app.js"></script>
+<script>
+  const slug = new URLSearchParams(location.search).get("slug");
+  const p = getProduct(slug) || PRODUCTS[0];
+
+  document.getElementById("doc-title").textContent = `${p.name} — DEVAN'S`;
+  document.getElementById("crumb-name").textContent = p.name;
+
+  // product photo
+  document.getElementById("pd-photo").innerHTML = `
+    ${p.tag ? `<span class="card-tag">${p.tag}</span>` : ""}
+    <img src="${p.image}" alt="${p.name} — ${p.sub}" width="500" height="500" />`;
+
+  // brew chips
+  document.getElementById("brew-row").innerHTML = p.brews
+    .map((b) => `<span class="brew-chip">${brewIcon}${b}</span>`)
+    .join("");
+
+  // buy panel
+  document.getElementById("buy-price").textContent = money(p.price);
+  document.getElementById("buy-roast").textContent = ROAST_LEVELS[p.roast].toUpperCase();
+  document.getElementById("weight-select").innerHTML = p.weights
+    .map((w, i) => `<button class="weight-btn ${i === 0 ? "active" : ""}" data-w="${w}">${w}</button>`)
+    .join("");
+  document.getElementById("weight-select").addEventListener("click", (e) => {
+    const btn = e.target.closest(".weight-btn");
+    if (!btn) return;
+    document.querySelectorAll(".weight-btn").forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+  });
+  document.getElementById("add-cart").addEventListener("click", () => showToast(`${p.name} added — this is a design concept, no live cart.`));
+
+  // info column
+  document.getElementById("badge-cat").textContent = p.category;
+  if (p.tag) {
+    const tagEl = document.getElementById("badge-tag");
+    tagEl.textContent = p.tag;
+    tagEl.style.display = "inline-block";
+  }
+  document.getElementById("p-name").textContent = p.name;
+  document.getElementById("p-sub").textContent = p.sub;
+  document.getElementById("p-origin").textContent = p.origin;
+  document.getElementById("p-altitude").textContent = p.altitude;
+  document.getElementById("p-process").textContent = p.process;
+  document.getElementById("p-blurb").textContent = p.blurb;
+  document.getElementById("p-tasting").textContent = p.tastingNote;
+  document.getElementById("p-best-enjoyed").textContent = p.bestEnjoyed || "";
+
+  // flavour bloom chart + legend
+  document.getElementById("bloom-chart").innerHTML = flavourBloom(p.metrics, { size: 360 });
+  document.getElementById("bloom-legend").innerHTML = Object.keys(METRIC_META)
+    .map((k) => `<div class="bloom-legend-item"><span>${METRIC_META[k].label}</span><b>${p.metrics[k]}/100</b></div>`)
+    .join("");
+
+  // roast detail gauge (with labels)
+  document.getElementById("roast-detail-label").textContent = ROAST_LEVELS[p.roast];
+  document.getElementById("roast-detail-gauge").innerHTML = roastGauge(p.roast, { withLabels: true });
+
+  // How to Brew — tabbed recipe card
+  function renderRecipe(method) {
+    const r = BREW_RECIPES[method];
+    const grid = document.getElementById("recipe-grid");
+    if (!r) { grid.innerHTML = `<div class="recipe-stat"><span>Recipe</span><b>Coming soon</b></div>`; return; }
+    grid.innerHTML = `
+      <div class="recipe-stat"><span>Dose</span><b>${r.dose}</b></div>
+      <div class="recipe-stat"><span>Water</span><b>${r.water}</b></div>
+      <div class="recipe-stat"><span>Temp</span><b>${r.temp}</b></div>
+      <div class="recipe-stat"><span>Time</span><b>${r.time}</b></div>
+      <div class="recipe-stat"><span>Grind</span><b>${r.grind}</b></div>`;
+  }
+  const brewTabsEl = document.getElementById("brew-tabs");
+  brewTabsEl.innerHTML = p.brews.map((b, i) => `<button type="button" class="brew-tab ${i === 0 ? "active" : ""}" data-method="${b}">${b}</button>`).join("");
+  brewTabsEl.addEventListener("click", (e) => {
+    const btn = e.target.closest(".brew-tab");
+    if (!btn) return;
+    brewTabsEl.querySelectorAll(".brew-tab").forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    renderRecipe(btn.dataset.method);
+  });
+  renderRecipe(p.brews[0]);
+
+  // related products
+  const related = PRODUCTS.filter((x) => x.slug !== p.slug && (x.category === p.category || x.roast === p.roast)).slice(0, 4);
+  const fallback = PRODUCTS.filter((x) => x.slug !== p.slug && !related.includes(x)).slice(0, 4 - related.length);
+  renderGrid(document.getElementById("related-grid"), [...related, ...fallback]);
+
+  document.getElementById("promo-form")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    showToast("Design demo only — this form doesn't actually send.");
+  });
+</script>
+</body>
+</html>
