@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Name — Software Engineer</title>
-  <meta name="description" content="Portfolio of Your Name, a software engineer building thoughtful, well-crafted products." />
+  <title>KSP — Industrial Designer, IIT Roorkee</title>
+  <meta name="description" content="Portfolio of KSP, an industrial designer at IIT Roorkee's Department of Design — product UI, brand redesigns, and applied research." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -16,64 +16,117 @@
 
   <header class="nav">
     <div class="wrap nav-row">
-      <span class="wordmark">Your Name</span>
+      <a class="wordmark" href="#top"><span class="mark">+</span> KSP</a>
       <nav class="nav-links">
-        <a class="plain" href="#about">About</a>
-        <a class="btn-dark" href="mailto:you@example.com">Get in touch</a>
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a class="btn-ghost" href="mailto:kspmobi@gmail.com">Say hello</a>
       </nav>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <span class="badge"><span class="dot"></span>open to new opportunities</span>
-        <h1 class="headline">I build software that feels <em>simple</em>, fast, and considered.</h1>
-        <p class="lede">I'm a software engineer focused on clean interfaces and reliable systems. This is where I share what I'm building and how to reach me.</p>
-        <div class="cta-row">
-          <a class="btn-primary" href="#about">Learn more</a>
-          <a class="btn-ghost" href="mailto:you@example.com">Say hello</a>
-        </div>
-      </div>
+  <section id="top" class="hero">
+    <span class="reg reg-tl" aria-hidden="true">+</span>
+    <span class="reg reg-tr" aria-hidden="true">+</span>
+    <span class="reg reg-bl" aria-hidden="true">+</span>
+    <span class="reg reg-br" aria-hidden="true">+</span>
+    <div class="glow" aria-hidden="true"></div>
 
-      <div class="spec-card">
-        <p class="spec-label">// profile</p>
-        <dl class="spec-list">
-          <div class="spec-row"><dt>Focus</dt><dd>Full-stack engineering</dd></div>
-          <div class="spec-row"><dt>Based in</dt><dd>City, Country</dd></div>
-          <div class="spec-row"><dt>Status</dt><dd>Open to work</dd></div>
-          <div class="spec-row"><dt>Stack</dt><dd>TS · React · Node</dd></div>
-        </dl>
+    <div class="wrap hero-inner">
+      <p class="eyebrow">Industrial Designer — Dept. of Design, IIT Roorkee</p>
+      <h1 class="headline">Products, interfaces,<br />and the research behind them.</h1>
+      <p class="lede">Case studies in product UI, brand redesign, and applied research — designed and built end to end.</p>
+      <div class="cta-row">
+        <a class="btn-primary" href="#work">View selected work</a>
+        <a class="btn-ghost" href="mailto:kspmobi@gmail.com">Say hello</a>
       </div>
+    </div>
+
+    <p class="ticker wrap">PRODUCT UI &nbsp;·&nbsp; BRAND &amp; WEB &nbsp;·&nbsp; APPLIED RESEARCH &nbsp;·&nbsp; SYSTEMS</p>
+
+    <a href="#about" class="scroll-cue" aria-label="Scroll to content">
+      <span class="scroll-label">SCROLL</span>
+      <svg width="14" height="9" viewBox="0 0 14 9" fill="none" aria-hidden="true">
+        <path d="M1 1L7 7L13 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </section>
+
+  <section id="about" class="wrap about reveal">
+    <div class="about-copy">
+      <p class="eyebrow">Profile</p>
+      <h2 class="section-title">Design, built the way it's engineered.</h2>
+      <p>I'm an industrial designer working out of IIT Roorkee's Department of Design, where design briefs rarely stay on one medium. A project might start as a research question about how people use a water motor, and end as an interface with states, thresholds, and edge cases — or start as a century-old coffee roastery's story and end as a storefront.</p>
+      <p>Most of what's here started as an unofficial redesign or a personal case study — a way of testing ideas against real briefs, real constraints, and real content, not just a moodboard.</p>
+    </div>
+
+    <dl class="plate">
+      <p class="plate-label">Spec plate</p>
+      <div class="plate-row"><dt>Role</dt><dd>Industrial Designer</dd></div>
+      <div class="plate-row"><dt>Affil.</dt><dd>IIT Roorkee, Dept. of Design</dd></div>
+      <div class="plate-row"><dt>Focus</dt><dd>Product UI, urban systems, research</dd></div>
+      <div class="plate-row"><dt>Team</dt><dd>Leads a team of student designers</dd></div>
+    </dl>
+  </section>
+
+  <section id="work" class="wrap work">
+    <p class="eyebrow reveal">Work</p>
+    <h2 class="section-title reveal">Selected case studies</h2>
+    <p class="work-intro reveal">Three briefs, three mediums — an app, a storefront, and an institute site.</p>
+
+    <div class="cards">
+      <article class="card reveal">
+        <div class="card-head">
+          <h3>H2o Connect</h3>
+          <dl class="plate plate-mini">
+            <div class="plate-row"><dt>Type</dt><dd>App concept</dd></div>
+            <div class="plate-row"><dt>Medium</dt><dd>HTML / CSS / JS</dd></div>
+          </dl>
+        </div>
+        <p>A dark, bento-style interface for a domestic water management system — automatic and manual monitoring modes, multi-tank support, and an eco mode for cutting motor runtime.</p>
+        <a class="card-link" href="h2o-connect/index.html">View case study <span aria-hidden="true">→</span></a>
+      </article>
+
+      <article class="card reveal">
+        <div class="card-head">
+          <h3>DEVAN&rsquo;S</h3>
+          <dl class="plate plate-mini">
+            <div class="plate-row"><dt>Type</dt><dd>Brand &amp; web redesign</dd></div>
+            <div class="plate-row"><dt>Medium</dt><dd>HTML / CSS / JS</dd></div>
+          </dl>
+        </div>
+        <p>An unofficial redesign for a family-run Delhi coffee roastery trading since 1962 — single-origin listings, tasting notes, and a storefront that reads as considered as the coffee.</p>
+        <a class="card-link" href="devans-redesign/index.html">View case study <span aria-hidden="true">→</span></a>
+      </article>
+
+      <article class="card reveal">
+        <div class="card-head">
+          <h3>AMRUT CUPCB</h3>
+          <dl class="plate plate-mini">
+            <div class="plate-row"><dt>Type</dt><dd>Institutional site concept</dd></div>
+            <div class="plate-row"><dt>Medium</dt><dd>React (Vite)</dd></div>
+          </dl>
+        </div>
+        <p>An unofficial concept redesign of IIT Roorkee's AMRUT Centre of Urban Planning — turning a dense policy mandate into a navigable site with a clear thematic structure.</p>
+        <a class="card-link" href="amrut-cupcb-redesign/">View source <span aria-hidden="true">→</span></a>
+        <p class="card-note">React app — run locally with <code>npm run dev</code></p>
+      </article>
     </div>
   </section>
 
-  <section id="about" class="wrap about">
-    <div>
-      <p class="about-eyebrow">About</p>
-      <p class="about-title">A little about how I work.</p>
-    </div>
-    <div class="about-body">
-      <p>Placeholder bio — replace this with your own story. Talk about your background, what kind of problems you enjoy solving, and the experience you bring. Keep it to a few tight paragraphs; this section is meant to build trust quickly, not tell your whole life story.</p>
-      <p>Mention the tools and technologies you work with most, the kind of teams or projects you thrive in, and anything that sets your approach apart — for example, an emphasis on craft, speed, or user empathy.</p>
-      <div class="tags">
-        <span class="tag">TypeScript</span>
-        <span class="tag">React</span>
-        <span class="tag">Next.js</span>
-        <span class="tag">Node.js</span>
-        <span class="tag">PostgreSQL</span>
-      </div>
-    </div>
+  <section id="contact" class="wrap contact reveal">
+    <span class="reg reg-tl" aria-hidden="true">+</span>
+    <span class="reg reg-tr" aria-hidden="true">+</span>
+    <p class="eyebrow">Contact</p>
+    <h2 class="section-title">Get in touch</h2>
+    <p>Based in Roorkee, Uttarakhand. For collaborations, case studies, or a longer conversation about any of the above:</p>
+    <a class="btn-primary" href="mailto:kspmobi@gmail.com">kspmobi@gmail.com</a>
   </section>
 
   <footer>
     <div class="wrap footer-row">
-      <p class="footer-copy">© <span id="year"></span> Your Name. All rights reserved.</p>
-      <div class="footer-links">
-        <a href="https://github.com/yourhandle" target="_blank" rel="noreferrer">GitHub</a>
-        <a href="https://linkedin.com/in/yourhandle" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a href="mailto:you@example.com">Email</a>
-      </div>
+      <p class="footer-copy">© <span id="year"></span> KSP. Unofficial concept work — not affiliated with or endorsed by the organizations referenced above.</p>
     </div>
   </footer>
 
